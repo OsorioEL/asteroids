@@ -25,7 +25,7 @@ def main():
   # this loop will run until the game is closed
   # it will run at 60 frames per second
   while True:
-    player.draw(screen) # draw the player
+    player.update(dt) # update the player
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         return
