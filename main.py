@@ -16,6 +16,12 @@ def main():
   clock = pygame.time.Clock()
   dt = 0
   
+  # create two groups
+  updatable = pygame.sprite.Group()
+  drawable = pygame.sprite.Group()
+  
+  PLAYER.containers = (updatable, drawable)
+  
   #instnciate the player
   x = SCREEN_WIDTH / 2
   y = SCREEN_HEIGHT / 2
@@ -25,12 +31,14 @@ def main():
   # this loop will run until the game is closed
   # it will run at 60 frames per second
   while True:
-    player.update(dt) # update the player
+    updatable.update(dt) # update all objects in the updatable group
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         return
     pygame.Surface.fill(screen,(0,0,0)) # Fill screen
-    player.draw(screen) # draw the player
+    # loop through all objects in the drawable group
+    for obj in drawable:
+      obj.draw(screen)
     pygame.display.flip()
     dt = clock.tick(60)/1000 # dt is the time since the last frame in seconds
 
