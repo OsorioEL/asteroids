@@ -55,6 +55,13 @@ def main():
       if event.type == pygame.QUIT:
         return
     pygame.Surface.fill(screen,(0,0,0)) # Fill screen
+   
+   # Collision Check for shots and asteroids
+    for asteroid in asteroids:
+      for shot in shots:
+        if shot.collision(asteroid):
+          asteroid.kill()
+          shot.kill()  
     # loop through all objects in the drawable group
     for obj in drawable:
       obj.draw(screen)
